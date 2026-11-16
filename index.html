@@ -1,0 +1,118 @@
+<!doctype html>
+<!-- Estructura semántica del formulario y la lista de tareas. -->
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f7f7f3" />
+    <meta name="description" content="Organiza tus tareas por importancia y sigue lo que ya culminaste." />
+    <title>Mis tareas</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script type="module" src="./src/main.js"></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="site-header">
+        <div class="brand"><span class="brand-mark" aria-hidden="true"></span> Mis tareas</div>
+        <span class="header-note">Un lugar para avanzar con claridad</span>
+      </header>
+
+      <main>
+        <div class="page-heading">
+          <div>
+            <h1>Organiza lo que sigue.</h1>
+            <p>Registra tus tareas, decide qué importa y marca cada avance.</p>
+          </div>
+          <div class="heading-decoration" aria-hidden="true"><span></span><span></span><span></span></div>
+        </div>
+
+        <div class="workspace">
+          <section class="task-composer" aria-labelledby="new-task-title">
+            <div class="section-heading">
+              <h2 id="new-task-title">Nueva tarea</h2>
+              <p>Define qué harás y cuándo. No puede coincidir con otra tarea del mismo día.</p>
+            </div>
+
+            <form id="task-form" novalidate>
+              <div class="field">
+                <label for="task-title">¿Qué necesitas hacer? <span aria-hidden="true">*</span></label>
+                <input id="task-title" name="title" type="text" maxlength="80" required autocomplete="off" placeholder="Ej. Preparar la presentación" />
+              </div>
+
+              <div class="field">
+                <label for="task-description">Detalles <span class="optional">(opcional)</span></label>
+                <textarea id="task-description" name="description" rows="3" maxlength="280" placeholder="Agrega una nota para recordarlo mejor"></textarea>
+              </div>
+
+              <div class="field">
+                <label for="task-block">Bloque <span aria-hidden="true">*</span></label>
+                <input id="task-block" name="block" type="text" maxlength="50" required placeholder="Ej. Estudio" />
+              </div>
+
+              <div class="field">
+                <label for="task-date">Fecha <span aria-hidden="true">*</span></label>
+                <input id="task-date" name="date" type="date" required />
+              </div>
+
+              <div class="time-fields">
+                <div class="field">
+                  <label for="task-start">Empieza <span aria-hidden="true">*</span></label>
+                  <input id="task-start" name="startTime" type="time" required />
+                </div>
+                <div class="field">
+                  <label for="task-end">Termina <span aria-hidden="true">*</span></label>
+                  <input id="task-end" name="endTime" type="time" required />
+                </div>
+              </div>
+
+              <fieldset class="priority-field">
+                <legend>Importancia</legend>
+                <div class="priority-options">
+                  <label class="priority-option priority-high"><input type="radio" name="priority" value="alta" /> <span>Alta</span></label>
+                  <label class="priority-option priority-medium"><input type="radio" name="priority" value="media" checked /> <span>Media</span></label>
+                  <label class="priority-option priority-low"><input type="radio" name="priority" value="baja" /> <span>Baja</span></label>
+                </div>
+              </fieldset>
+
+              <p id="form-message" class="form-message" role="status" aria-live="polite" hidden></p>
+              <button id="submit-task" class="primary-button" type="submit">Agregar tarea</button>
+              <button id="cancel-edit" class="cancel-button" type="button" hidden>Cancelar edición</button>
+            </form>
+          </section>
+
+          <section class="task-board" aria-labelledby="task-board-title">
+            <div class="board-heading">
+              <div>
+                <h2 id="task-board-title">Tu lista</h2>
+                <p>Todo lo que tienes entre manos.</p>
+              </div>
+              <div class="progress-count"><strong id="completed-count">0</strong><span>culminadas</span></div>
+            </div>
+
+            <div class="summary" aria-label="Resumen de tareas">
+              <div><strong id="pending-count">0</strong><span>pendientes</span></div>
+              <div><strong id="total-count">0</strong><span>en total</span></div>
+            </div>
+
+            <div class="list-toolbar">
+              <div id="task-filters" class="filters" aria-label="Filtrar tareas">
+                <button type="button" data-filter="todas" aria-pressed="true">Todas</button>
+                <button type="button" data-filter="pendientes" aria-pressed="false">Pendientes</button>
+                <button type="button" data-filter="culminadas" aria-pressed="false">Culminadas</button>
+              </div>
+            </div>
+
+            <ul id="task-list" class="task-list" aria-live="polite"></ul>
+            <div id="empty-state" class="empty-state" hidden>
+              <div class="empty-illustration" aria-hidden="true"><span></span><span></span><span></span></div>
+              <h3 id="empty-title">Tu lista empieza aquí</h3>
+              <p id="empty-description">Agrega una tarea para tener claro tu próximo paso.</p>
+            </div>
+          </section>
+        </div>
+      </main>
+
+      <footer class="site-footer">Un paso a la vez.</footer>
+    </div>
+  </body>
+</html>
